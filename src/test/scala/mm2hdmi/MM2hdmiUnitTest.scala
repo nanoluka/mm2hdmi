@@ -15,26 +15,20 @@ class MM2hdmiUnitTester(c: MM2hdmi) extends PeekPokeTester(c) {
     * @param b positive integer
     * @return the GCD of a and b
     */
-  def computeRGB(d: Int): (Int, Int, Int, Int, Int) = {
+  def computeRGB(d: Int): (Int, Int, Int) = {
     var data = d
     var R = 0
-    var G = 0
-    var B = 0
     var vSync = 0
     var hSync = 0
 
     if ( d == 0 ) {
         R = 0
-        G = 0
-        B = 0
       }
       else {
         R = 255
-        G = 255
-        B = 255
       }
     
-    (R, G, B, vSync, hSync)
+    (R, vSync, hSync)
   }
 
   def toBinary(n: Int): String = n match {
@@ -52,7 +46,7 @@ class MM2hdmiUnitTester(c: MM2hdmi) extends PeekPokeTester(c) {
   private val mm2hdmi = c
 
 
-    for (i <- 12 to 100) {
+    for (i <- 1 to 100) {
       poke(mm2hdmi.io.data, i)
       poke(mm2hdmi.io.newData, 1)
       step(1)
@@ -64,11 +58,9 @@ class MM2hdmiUnitTester(c: MM2hdmi) extends PeekPokeTester(c) {
       printf("i string je %s\n", dBits)
       for ( j <- dBits) {
         step(1)
-        val (expectedR, expectedG, expectedB, expectedVSync, expectedHSync) = computeRGB((j.toInt)-48)
+        val (expectedR, expectedVSync, expectedHSync) = computeRGB((j.toInt)-48)
         printf("dbits od j je %d\n", (j.toInt)-48)
         expect(mm2hdmi.io.red, expectedR)
-        expect(mm2hdmi.io.green, expectedG)
-        expect(mm2hdmi.io.blue, expectedB)
       }
       
     }
