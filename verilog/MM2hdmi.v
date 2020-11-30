@@ -31,17 +31,15 @@ module MM2hdmi(
   reg [31:0] _RAND_18;
   reg [31:0] _RAND_19;
   reg [31:0] _RAND_20;
-  reg [31:0] _RAND_21;
 `endif // RANDOMIZE_REG_INIT
   reg  regNewData; // @[mm2hdmi.scala 19:27]
-  reg  regHSync; // @[mm2hdmi.scala 21:25]
-  wire  _T_1 = regHSync + 1'h1; // @[mm2hdmi.scala 22:24]
-  reg [4:0] regRow; // @[mm2hdmi.scala 24:23]
-  wire [4:0] _T_4 = regRow + 5'h1; // @[mm2hdmi.scala 26:22]
-  reg  regVSync; // @[mm2hdmi.scala 29:25]
-  wire [5:0] _GEN_17 = {{1'd0}, regRow}; // @[mm2hdmi.scala 30:15]
-  wire  _T_5 = _GEN_17 == 6'h20; // @[mm2hdmi.scala 30:15]
-  wire  _T_7 = regVSync + 1'h1; // @[mm2hdmi.scala 31:26]
+  reg [4:0] regRow; // @[mm2hdmi.scala 21:23]
+  wire [4:0] _T_2 = regRow + 5'h1; // @[mm2hdmi.scala 23:22]
+  reg  regVSync; // @[mm2hdmi.scala 26:25]
+  wire  _T_3 = regRow == 5'h1f; // @[mm2hdmi.scala 27:15]
+  wire  _T_5 = _T_3 & io_newData; // @[mm2hdmi.scala 27:24]
+  wire  _T_7 = regVSync + 1'h1; // @[mm2hdmi.scala 28:26]
+  wire  _GEN_1 = _T_5 & _T_7; // @[mm2hdmi.scala 27:47]
   reg [15:0] regData; // @[mm2hdmi.scala 34:24]
   wire  _T_9 = ~regData[0]; // @[mm2hdmi.scala 36:43]
   reg [7:0] regMuxRed0; // @[mm2hdmi.scala 36:27]
@@ -112,7 +110,7 @@ module MM2hdmi(
   assign io_blue = _T_62 ? regMuxRed0 : _GEN_15; // @[mm2hdmi.scala 59:13 mm2hdmi.scala 64:13 mm2hdmi.scala 69:13 mm2hdmi.scala 74:13 mm2hdmi.scala 79:13 mm2hdmi.scala 84:13 mm2hdmi.scala 89:13 mm2hdmi.scala 94:13 mm2hdmi.scala 99:13 mm2hdmi.scala 104:13 mm2hdmi.scala 109:13 mm2hdmi.scala 114:13 mm2hdmi.scala 119:13 mm2hdmi.scala 124:13 mm2hdmi.scala 129:13 mm2hdmi.scala 134:13]
   assign io_green = _T_62 ? regMuxRed0 : _GEN_15; // @[mm2hdmi.scala 58:14 mm2hdmi.scala 63:14 mm2hdmi.scala 68:14 mm2hdmi.scala 73:14 mm2hdmi.scala 78:14 mm2hdmi.scala 83:14 mm2hdmi.scala 88:14 mm2hdmi.scala 93:14 mm2hdmi.scala 98:14 mm2hdmi.scala 103:14 mm2hdmi.scala 108:14 mm2hdmi.scala 113:14 mm2hdmi.scala 118:14 mm2hdmi.scala 123:14 mm2hdmi.scala 128:14 mm2hdmi.scala 133:14]
   assign io_vSync = regVSync; // @[mm2hdmi.scala 138:12]
-  assign io_hSync = regHSync; // @[mm2hdmi.scala 137:12]
+  assign io_hSync = regNewData; // @[mm2hdmi.scala 137:12]
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
 `define RANDOMIZE
 `endif
@@ -151,47 +149,45 @@ initial begin
   _RAND_0 = {1{`RANDOM}};
   regNewData = _RAND_0[0:0];
   _RAND_1 = {1{`RANDOM}};
-  regHSync = _RAND_1[0:0];
+  regRow = _RAND_1[4:0];
   _RAND_2 = {1{`RANDOM}};
-  regRow = _RAND_2[4:0];
+  regVSync = _RAND_2[0:0];
   _RAND_3 = {1{`RANDOM}};
-  regVSync = _RAND_3[0:0];
+  regData = _RAND_3[15:0];
   _RAND_4 = {1{`RANDOM}};
-  regData = _RAND_4[15:0];
+  regMuxRed0 = _RAND_4[7:0];
   _RAND_5 = {1{`RANDOM}};
-  regMuxRed0 = _RAND_5[7:0];
+  regMuxRed1 = _RAND_5[7:0];
   _RAND_6 = {1{`RANDOM}};
-  regMuxRed1 = _RAND_6[7:0];
+  regMuxRed2 = _RAND_6[7:0];
   _RAND_7 = {1{`RANDOM}};
-  regMuxRed2 = _RAND_7[7:0];
+  regMuxRed3 = _RAND_7[7:0];
   _RAND_8 = {1{`RANDOM}};
-  regMuxRed3 = _RAND_8[7:0];
+  regMuxRed4 = _RAND_8[7:0];
   _RAND_9 = {1{`RANDOM}};
-  regMuxRed4 = _RAND_9[7:0];
+  regMuxRed5 = _RAND_9[7:0];
   _RAND_10 = {1{`RANDOM}};
-  regMuxRed5 = _RAND_10[7:0];
+  regMuxRed6 = _RAND_10[7:0];
   _RAND_11 = {1{`RANDOM}};
-  regMuxRed6 = _RAND_11[7:0];
+  regMuxRed7 = _RAND_11[7:0];
   _RAND_12 = {1{`RANDOM}};
-  regMuxRed7 = _RAND_12[7:0];
+  regMuxRed8 = _RAND_12[7:0];
   _RAND_13 = {1{`RANDOM}};
-  regMuxRed8 = _RAND_13[7:0];
+  regMuxRed9 = _RAND_13[7:0];
   _RAND_14 = {1{`RANDOM}};
-  regMuxRed9 = _RAND_14[7:0];
+  regMuxRed10 = _RAND_14[7:0];
   _RAND_15 = {1{`RANDOM}};
-  regMuxRed10 = _RAND_15[7:0];
+  regMuxRed11 = _RAND_15[7:0];
   _RAND_16 = {1{`RANDOM}};
-  regMuxRed11 = _RAND_16[7:0];
+  regMuxRed12 = _RAND_16[7:0];
   _RAND_17 = {1{`RANDOM}};
-  regMuxRed12 = _RAND_17[7:0];
+  regMuxRed13 = _RAND_17[7:0];
   _RAND_18 = {1{`RANDOM}};
-  regMuxRed13 = _RAND_18[7:0];
+  regMuxRed14 = _RAND_18[7:0];
   _RAND_19 = {1{`RANDOM}};
-  regMuxRed14 = _RAND_19[7:0];
+  regMuxRed15 = _RAND_19[7:0];
   _RAND_20 = {1{`RANDOM}};
-  regMuxRed15 = _RAND_20[7:0];
-  _RAND_21 = {1{`RANDOM}};
-  outControlCounter = _RAND_21[3:0];
+  outControlCounter = _RAND_20[3:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
@@ -202,19 +198,14 @@ end // initial
   always @(posedge clock) begin
     regNewData <= io_newData;
     if (reset) begin
-      regHSync <= 1'h0;
-    end else begin
-      regHSync <= _T_1;
-    end
-    if (reset) begin
       regRow <= 5'h0;
     end else if (io_newData) begin
-      regRow <= _T_4;
+      regRow <= _T_2;
     end
     if (reset) begin
       regVSync <= 1'h0;
-    end else if (_T_5) begin
-      regVSync <= _T_7;
+    end else begin
+      regVSync <= _GEN_1;
     end
     regData <= io_data;
     if (_T_9) begin

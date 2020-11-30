@@ -52,7 +52,7 @@ class MM2hdmiUnitTester(c: MM2hdmi) extends PeekPokeTester(c) {
   private val mm2hdmi = c
 
 
-    for (i <- 12 to 100 by 51) {
+    for (i <- 12 to 100) {
       poke(mm2hdmi.io.data, i)
       poke(mm2hdmi.io.newData, 1)
       step(1)
