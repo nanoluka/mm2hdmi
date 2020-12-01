@@ -51,15 +51,14 @@ class MM2hdmiUnitTester(c: MM2hdmi) extends PeekPokeTester(c) {
       poke(mm2hdmi.io.newData, 1)
       step(1)
       poke(mm2hdmi.io.newData, 0)
-      //poke(mm2hdmi.io.address, j)
 
       var dBits = singleOutTheData(i)
-      printf("i je %d\n", i)
-      printf("i string je %s\n", dBits)
+      //printf("i je %d\n", i)
+      //printf("i string je %s\n", dBits)
       for ( j <- dBits) {
         step(1)
         val (expectedR, expectedVSync, expectedHSync) = computeRGB((j.toInt)-48)
-        printf("dbits od j je %d\n", (j.toInt)-48)
+        //printf("dbits od j je %d\n", (j.toInt)-48)
         expect(mm2hdmi.io.red, expectedR)
       }
       
