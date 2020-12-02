@@ -20,6 +20,9 @@ class MM2hdmi extends Module {
   when(regNewData === 1.U) {
     regRow := regRow + 1.U
   }
+  when(regRow === 31.U && regNewData === 1.U) {
+    regRow := 0.U
+  }
 
   val regVSync = RegInit(0.U(1.W))
   when(regRow === 31.U && io.newData === 1.U) {
