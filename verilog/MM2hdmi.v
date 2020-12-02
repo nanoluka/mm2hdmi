@@ -195,7 +195,7 @@ end // initial
     regNewData <= io_newData;
     if (reset) begin
       regRow <= 5'h0;
-    end else if (io_newData) begin
+    end else if (regNewData) begin
       regRow <= _T_2;
     end
     if (reset) begin

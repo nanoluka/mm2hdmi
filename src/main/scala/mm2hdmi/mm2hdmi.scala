@@ -17,7 +17,7 @@ class MM2hdmi extends Module {
   val regNewData = RegNext(io.newData)
 
   val regRow = RegInit(0.U(5.W))
-  when(io.newData === 1.U) {
+  when(regNewData === 1.U) {
     regRow := regRow + 1.U
   }
 
